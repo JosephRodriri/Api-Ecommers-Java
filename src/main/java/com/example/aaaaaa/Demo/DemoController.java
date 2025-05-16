@@ -1,5 +1,4 @@
-package com.example.aaaaaa.Enpoints;
-
+package com.example.aaaaaa.Demo;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class DemoController {
-    @PostMapping(value = "demo")
-    public String welcome() {
 
-        return "Welcome from secure enpoints";
+    @PostMapping(value = "demo")
+    public String welcome(){
+        return "Welcome from Demo";
     }
 }
