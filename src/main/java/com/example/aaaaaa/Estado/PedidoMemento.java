@@ -1,4 +1,4 @@
-package co.edu.ucc.jose.Estado;
+package com.example.aaaaaa.Estado;
 
 import java.util.Date;
 
