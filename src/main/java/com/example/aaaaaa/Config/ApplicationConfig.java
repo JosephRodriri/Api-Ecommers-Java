@@ -1,6 +1,6 @@
 package com.example.aaaaaa.Config;
 
-import com.example.aaaaaa.Usuario.UsuarioRepository;
+import com.example.aaaaaa.Usuario.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-    private final UsuarioRepository usuarioRepository;
+
+    private final UserRepository userRepository;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
@@ -33,13 +34,18 @@ public class ApplicationConfig {
     }
 
     @Bean
+    public UserDetailsService userDetailsService() {
+        return username -> userRepository.findByUsername(username)
+                .orElseThrow(()-> new UsernameNotFoundException("user not found"));
+    }
+
+
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return username -> usuarioRepository.findByEmail(username)
-                .orElseThrow(()-> new UsernameNotFoundException("Usuario no encontrado"));
-    }
+
+
 
 }
+

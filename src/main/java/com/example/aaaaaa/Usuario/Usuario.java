@@ -17,25 +17,26 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Usuario",uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
+@Table(name = "usuario",uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String nombre;
+     Integer id;
     @Column(nullable = false)
-    private String email;
-    private String password;
-    private Rol role;
+    String username;
+    String nombre;
+    String password;
+     @Enumerated(EnumType.STRING)
+     Rol role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return List.of(new SimpleGrantedAuthority((role.name())));
     }
 
     @Override
     public String getUsername() {
-        return "";
+        return username;
     }
 
 
